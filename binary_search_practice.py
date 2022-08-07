@@ -18,18 +18,45 @@ Brute Force 1 :
 Brute Force 2 :
 1. durch die liste durchgehn index finden wenn die gegebene zahl größer als die Zahl rechts von ihr ist.
 
+Optimize:
+1. Variable lo auf 0, Varibale hi auf lenge der Liste, last_numbber auf letze zahl setzen
+2. mid durch lo und hi addieren und durch 2 rechen
+3. mid_nummber durch nums mit index mid bekommen
+4. wenn mid_number kleiner als linker nachber ist mid_nummber zurückgeben
+5. Wenn mid_nummber kleiner als letzte zahl:
+    hi auf mid -1 setzen
+6. Wenn mid_number größer als letzte zahl:
+    lo auf mid + 1 setzen
 """
 
 
+# def count_rotations(nums: list) -> int:
+#     index = 0
+#     if len(nums) == 0:
+#         return -1
+#     while index < len(nums) - 1 and len(nums) > 1:
+#         if nums[index] > nums[index + 1]:
+#             return index + 1
+#         index += 1
+#     return 0
+
+
 def count_rotations(nums: list) -> int:
-    index = 0
     if len(nums) == 0:
         return -1
-    while index < len(nums) - 1 and len(nums) > 1:
-        if nums[index] > nums[index + 1]:
-            return index + 1
-        index += 1
-    return 0
+    if len(nums) == 1:
+        return 0
+    lo, hi = 0, len(nums)
+    last_numbber = nums[-1]
+    while True:
+        mid = (lo + hi) // 2
+        mid_nummber = nums[mid]
+        if mid_nummber < nums[mid - 1]:
+            return mid
+        if mid_nummber < last_numbber:
+            hi = mid - 1
+        if mid_nummber > last_numbber:
+            lo = mid + 1
 
 
 tests = []
