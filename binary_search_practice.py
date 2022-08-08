@@ -93,7 +93,7 @@ def count_rotations(nums: list) -> int:
         return -1
     if len(nums) == 1:
         return 0
-    lo, hi = 0, len(nums)
+    lo, hi = 0, len(nums) - 1
     last_numbber = nums[-1]
     while True:
         mid = (lo + hi) // 2
