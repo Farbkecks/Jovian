@@ -73,6 +73,16 @@ def traversal_in_order(node, data=[]):
     return data
 
 
+def traversal_post_order(node, data=[]):
+    if node.left != None:
+        traversal_post_order(node.left, data)
+    if node.right != None:
+        traversal_post_order(node.right, data)
+    if node.key != 0:
+        data.append(node.key)
+    return data
+
+
 if __name__ == "__main__":
     data = ((1, 3, 0), 2, ((0, 3, 4), 5, (6, 7, 8)))
     tree = create_node_from_tuple(data)
