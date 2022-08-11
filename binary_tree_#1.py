@@ -63,8 +63,17 @@ def traversal_pre_order(node, data=[]):
     return data
 
 
+def traversal_in_order(node, data=[]):
+    if node.left != None:
+        traversal_in_order(node.left, data)
+    if node.key != 0:
+        data.append(node.key)
+    if node.right != None:
+        traversal_in_order(node.right, data)
+    return data
+
+
 if __name__ == "__main__":
     data = ((1, 3, 0), 2, ((0, 3, 4), 5, (6, 7, 8)))
     tree = create_node_from_tuple(data)
     display_keys(tree)
-    # print("richtig: 231534768")
