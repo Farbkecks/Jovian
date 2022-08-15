@@ -84,19 +84,19 @@ public class TreeMap {
         }
     }
 
-    public String[] listAll() {
-        ArrayList<String> arraylist = listAll(node);
-        String[] list = new String[arraylist.size()];
+    public TowItems[] listAll() {
+        ArrayList<TowItems> arraylist = listAll(node);
+        TowItems[] list = new TowItems[arraylist.size()];
         list = arraylist.toArray(list);
         return list;
     }
 
-    static ArrayList<String> listAll(TreeNode node) {
-        ArrayList<String> list = new ArrayList<String>();
+    static ArrayList<TowItems> listAll(TreeNode node) {
+        ArrayList<TowItems> list = new ArrayList<TowItems>();
         if (node.left != null) {
             list.addAll(listAll(node.left));
         }
-        list.add(node.key);
+        list.add(new TowItems(node.key, node.value));
         if (node.right != null) {
             list.addAll(listAll(node.right));
         }
@@ -108,15 +108,20 @@ public class TreeMap {
     }
 
     public void balance() {
-        String[] list = listAll();
+        TowItems[] list = listAll();
         this.node = balance(0, list.length - 1, null, list);
     }
 
-    static TreeNode balance(int lo, int hi, TreeNode node, String[] list) {
+    static TreeNode balance(int lo, int hi, TreeNode node, TowItems[] list) {
         int mid = (lo + hi) / 2;
-        if(node == null) {
-            node = new TreeNode()
+        if (lo > hi) {
+            return node;
         }
-
+        if (node == null) {
+            node = new TreeNode(list[mid].key, list[mid].value);
+        }
+        node.left = balance(lo, mid - 1, node.left, list);
+        node.right = balance(mid + 1, hi, node.right, list);
+        return node;
     }
 }

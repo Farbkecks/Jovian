@@ -6,8 +6,6 @@ public class TreeNode {
 
     public TreeNode(String key, String value) {
         this.key = key;
-        // this.left = null;
-        // this.right = null;
         this.value = value;
     }
 }
