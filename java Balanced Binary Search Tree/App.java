@@ -13,9 +13,9 @@ class App {
         tree.display();
         tree.balance();
         tree.display();
+
         System.out.println(tree.get("aakash"));
         tree.update("aakash", "sjdkfl");
         System.out.println(tree.get("aakash"));
-
     }
 }
