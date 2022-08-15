@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class TreeMap {
 
     public TreeNode node;
@@ -35,38 +37,77 @@ public class TreeMap {
         display(node.left, level + 1);
     }
 
-    public void insert(String key) {
+    public String get(String key) {
+        return get(node, key);
+    }
+
+    static String get(TreeNode node, String key) {
+        int order = key.compareTo(node.key);
+        if (order == 0) {
+            return node.value;
+        }
+        if (order < 0) {
+            return get(node.left, key);
+        } else {
+            return get(node.right, key);
+        }
+    }
+
+    public void insert(String key, String value) {
         if (node == null) {
-            node = new TreeNode(key);
+            node = new TreeNode(key, value);
             return;
         }
 
-        insert(node, key);
+        insertLeftOrRight(node, key, value);
     }
 
-    static void insert(TreeNode node, String key) {
-        int value = key.compareTo(node.key);
+    static void insertLeftOrRight(TreeNode node, String key, String value) {
+        int order = key.compareTo(node.key);
 
-        if (value < 0) {
-            node.left = insertLeftOrRight(node.left, key);
+        if (order < 0) {
+            node.left = insertLeafOrNot(node.left, key, value);
 
         }
-        if (value > 0) {
-            node.right = insertLeftOrRight(node.right, key);
+        if (order > 0) {
+            node.right = insertLeafOrNot(node.right, key, value);
         }
     }
 
-    static TreeNode insertLeftOrRight(TreeNode node, String key) {
+    static TreeNode insertLeafOrNot(TreeNode node, String key, String value) {
         if (node == null) {
-            node = new TreeNode(key);
+            node = new TreeNode(key, value);
             return node;
         } else {
-            insert(node, key);
+            insertLeftOrRight(node, key, value);
             return node;
         }
     }
 
-    // public String[] list_all() {
+    public String[] listAll() {
+        ArrayList<String> arraylist = listAll(node);
+        String[] list = new String[arraylist.size()];
+        list = arraylist.toArray(list);
+        return list;
+    }
+
+    static ArrayList<String> listAll(TreeNode node) {
+        ArrayList<String> list = new ArrayList<String>();
+        if (node.left != null) {
+            list.addAll(listAll(node.left));
+        }
+        list.add(node.key);
+        if (node.right != null) {
+            list.addAll(listAll(node.right));
+        }
+        return list;
+    }
+
+    // public void update(String key, String value) {
+    // update(node, key, value);
+    // }
+
+    // static void update(TreeNode node, String key, String value) {
 
     // }
 }
