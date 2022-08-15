@@ -1,9 +1,14 @@
 class App {
     public static void main(String[] args) {
-        TreeMap tree = new TreeMap("Hans");
-        tree.node.left = new TreeNode("Abc");
-        tree.node.right = new TreeNode("Zab");
-        tree.node.right.left = new TreeNode("sdjfklsdf");
+        TreeMap tree = new TreeMap();
+        tree.insert("jadhesh");
+        tree.insert("biraj");
+        tree.insert("aakash");
+        tree.insert("hemanth");
+        tree.insert("sonaksh");
+        tree.insert("siddhant");
+        tree.insert("vishal");
+
         tree.display();
     }
 }

@@ -2,8 +2,8 @@ public class TreeMap {
 
     public TreeNode node;
 
-    public TreeMap(String key) {
-        this.node = new TreeNode(key);
+    public TreeMap() {
+        this.node = null;
     }
 
     public void display() {
@@ -34,4 +34,39 @@ public class TreeMap {
         System.out.println(node.key);
         display(node.left, level + 1);
     }
+
+    public void insert(String key) {
+        if (node == null) {
+            node = new TreeNode(key);
+            return;
+        }
+
+        insert(node, key);
+    }
+
+    static void insert(TreeNode node, String key) {
+        int value = key.compareTo(node.key);
+
+        if (value < 0) {
+            node.left = insertLeftOrRight(node.left, key);
+
+        }
+        if (value > 0) {
+            node.right = insertLeftOrRight(node.right, key);
+        }
+    }
+
+    static TreeNode insertLeftOrRight(TreeNode node, String key) {
+        if (node == null) {
+            node = new TreeNode(key);
+            return node;
+        } else {
+            insert(node, key);
+            return node;
+        }
+    }
+
+    // public String[] list_all() {
+
+    // }
 }
