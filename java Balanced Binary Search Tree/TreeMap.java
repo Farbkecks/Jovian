@@ -38,18 +38,18 @@ public class TreeMap {
     }
 
     public String get(String key) {
-        return get(node, key);
+        return findNode(node, key).value;
     }
 
-    static String get(TreeNode node, String key) {
+    static TreeNode findNode(TreeNode node, String key) {
         int order = key.compareTo(node.key);
         if (order == 0) {
-            return node.value;
+            return node;
         }
         if (order < 0) {
-            return get(node.left, key);
+            return findNode(node.left, key);
         } else {
-            return get(node.right, key);
+            return findNode(node.right, key);
         }
     }
 
@@ -103,11 +103,20 @@ public class TreeMap {
         return list;
     }
 
-    // public void update(String key, String value) {
-    // update(node, key, value);
-    // }
+    public void update(String key, String value) {
+        findNode(node, key).value = value;
+    }
 
-    // static void update(TreeNode node, String key, String value) {
+    public void balance() {
+        String[] list = listAll();
+        this.node = balance(0, list.length - 1, null, list);
+    }
 
-    // }
+    static TreeNode balance(int lo, int hi, TreeNode node, String[] list) {
+        int mid = (lo + hi) / 2;
+        if(node == null) {
+            node = new TreeNode()
+        }
+
+    }
 }
