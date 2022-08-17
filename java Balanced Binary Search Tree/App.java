@@ -10,12 +10,12 @@ class App {
         tree.insert("sonaksh", "5");
         tree.insert("vishal", "7");
 
-        tree.display();
+        // tree.display();
         tree.balance();
         tree.display();
 
-        System.out.println(tree.get("aakash"));
-        tree.update("aakash", "sjdkfl");
-        System.out.println(tree.get("aakash"));
+        // System.out.println(tree.get("aakash"));
+        // tree.update("aakash", "sjdkfl");
+        // System.out.println(tree.get("aakash"));
     }
 }
