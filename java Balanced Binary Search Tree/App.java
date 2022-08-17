@@ -10,8 +10,10 @@ class App {
         tree.insert("sonaksh", "5");
         tree.insert("vishal", "7");
 
-        // tree.display();
+        tree.display();
         tree.balance();
+        tree.display();
+        // tree.delete("aakash");
         tree.display();
 
         // System.out.println(tree.get("aakash"));

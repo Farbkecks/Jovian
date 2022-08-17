@@ -109,25 +109,30 @@ public class TreeMap {
 
     public void balance() {
         TreeNode[] list = listAll();
-        this.node = balance(0, list.length - 1, null, list);
+        this.node = balance(0, list.length - 1, null, list, null);
     }
 
-    static TreeNode balance(int lo, int hi, TreeNode node, TreeNode[] list) {
+    static TreeNode balance(int lo, int hi, TreeNode node, TreeNode[] list, String parent) {
         int mid = (lo + hi) / 2;
         if (lo > hi) {
             return node;
         }
         if (node == null) {
-            node = new TreeNode(list[mid].key, list[mid].value, list[mid].parent);
+            node = new TreeNode(list[mid].key, list[mid].value, parent);
         }
-        node.left = balance(lo, mid - 1, node.left, list);
-        node.right = balance(mid + 1, hi, node.right, list);
+        node.left = balance(lo, mid - 1, node.left, list, list[mid].key);
+        node.right = balance(mid + 1, hi, node.right, list, list[mid].key);
         return node;
     }
 
     // public void delete(String key) {
-    // node = findNode(node, key);
-
+    // TreeNode treenode = findNode(node, key);
+    // if (treenode.right == null && treenode.left == null) {
+    // treenode = findNode(node, treenode.parent);
+    // if (treenode.left.key == key) {
+    // treenode.left = null;
+    // }
+    // }
     // }
 
 }
