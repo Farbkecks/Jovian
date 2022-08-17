@@ -125,14 +125,21 @@ public class TreeMap {
         return node;
     }
 
-    // public void delete(String key) {
-    // TreeNode treenode = findNode(node, key);
-    // if (treenode.right == null && treenode.left == null) {
-    // treenode = findNode(node, treenode.parent);
-    // if (treenode.left.key == key) {
-    // treenode.left = null;
-    // }
-    // }
-    // }
+    public void delete(String key) {
+        TreeNode treenode = findNode(node, key);
+        TreeNode parendnode = findNode(node, treenode.parent);
+        if (treenode.right == null && treenode.left == null) {
+            if (parendnode.left.key == key) {
+                parendnode.left = null;
+            }
+            if (parendnode.right.key == key) {
+                parendnode.right = null;
+            }
+        }
+        // int order = treenode.left.key.compareTo(treenode.right.key);
+        // if (order < 0) {
+        // parendnode.left = treenode.right;
+        // }
 
+    }
 }
