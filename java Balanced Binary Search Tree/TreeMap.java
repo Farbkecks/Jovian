@@ -126,20 +126,14 @@ public class TreeMap {
     }
 
     public void delete(String key) {
-        TreeNode treenode = findNode(node, key);
-        TreeNode parendnode = findNode(node, treenode.parent);
-        if (treenode.right == null && treenode.left == null) {
-            if (parendnode.left.key == key) {
-                parendnode.left = null;
-            }
-            if (parendnode.right.key == key) {
-                parendnode.right = null;
+        TreeNode[] list = listAll();
+        TreeNode[] newList = new TreeNode[list.length - 1];
+        for (int i = 0, j = 0; i < list.length; i++) {
+            if (list[i].key != key) {
+                newList[j] = list[i];
+                j++;
             }
         }
-        // int order = treenode.left.key.compareTo(treenode.right.key);
-        // if (order < 0) {
-        // parendnode.left = treenode.right;
-        // }
-
+        this.node = balance(0, newList.length - 1, null, newList, null);
     }
 }
