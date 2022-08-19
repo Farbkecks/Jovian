@@ -1,8 +1,8 @@
 class TreeNode:
     def __init__(self, key):
         self.key = key
-        self.right: TreeNode = None
-        self.left: TreeNode = None
+        self.right: TreeNode = None  # type: ignore
+        self.left: TreeNode = None  # type: ignore
 
 
 def create_node_from_tuple(data: tuple) -> TreeNode:
