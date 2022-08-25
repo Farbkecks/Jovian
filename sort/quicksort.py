@@ -5,15 +5,17 @@ import random
 class liste:
     def __init__(self, list) -> None:
         self.list = list
+        self.quicksort()
 
     def quicksort(self, start=0, end=None):
         def partion(start, end):
             l, r = start, end - 1
             while r > l:
-                if self.list[l] < self.list[end]:
+                if self.list[l] <= self.list[end]:
                     l += 1
                 elif self.list[r] > self.list[end]:
                     r -= 1
+                    pass
                 else:
                     self.list[l], self.list[r] = self.list[r], self.list[l]
             assert l == r
@@ -23,13 +25,17 @@ class liste:
             return end
 
         if len(self.list) in [0, 1]:
-            return self.list
+            return
 
         if end == None:
             end = len(self.list) - 1
+        if start < end:
+            pivot = partion(start, end)
+            self.quicksort(start, pivot - 1)
+            self.quicksort(pivot + 1, end)
 
-        pivot = partion(start, end)
-        print(self.list, self.list[pivot])
+    def show(self):
+        print(self.list)
 
 
 if __name__ == "__main__":
@@ -39,7 +45,7 @@ if __name__ == "__main__":
     tests.append({"input": {"nums": [1]}, "output": [1]})
     tests.append({"input": {"nums": [3, 1, 2, 5, 4, 6]}, "output": [1, 2, 3, 4, 5, 6]})
     tests.append(
-        {"input": {"nums": [3, -1, -2, 5, 1, 4, 6]}, "output": [-1, -2, 1, 3, 4, 5, 6]}
+        {"input": {"nums": [3, -1, -2, 5, 1, 4, 6]}, "output": [-2, -1, 1, 3, 4, 5, 6]}
     )
     tests.append(
         {
@@ -57,15 +63,16 @@ if __name__ == "__main__":
         }
     )
 
-    # x = 10000
-    # list1 = list(range(x))
-    # list2 = list(range(x))
-    # random.shuffle(list2)
-    # tests.append({"input": {"nums": list2}, "output": list1})
-    # pass
+    x = 100000
+    list1 = list(range(x))
+    list2 = list(range(x))
+    random.shuffle(list2)
+    tests.append({"input": {"nums": list2}, "output": list1})
+    pass
     for test in tests:
         start_time = time.time()
-        x = liste(test["input"]["nums"]).quicksort()
-        # print(output == test["output"], end="")
+        x = liste(test["input"]["nums"])
+        output = x.list
+        print(output == test["output"], end="")
         # print(f" output: {output}", end="")
-        # print(f" dauer: {time.time()-start_time}")
+        print(f" dauer: {time.time()-start_time}")
