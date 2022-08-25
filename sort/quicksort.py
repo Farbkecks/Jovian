@@ -1,38 +1,35 @@
 import time
 import random
 
-"""
-new_list erstellen
-for loob mit nums
-guck ob Anfang oder Ende passt
-so lange nach rechts gehn bis es links kleiner/gleich und rechts größer ist
-"""
 
+class liste:
+    def __init__(self, list) -> None:
+        self.list = list
 
-def quicksort(nums: list, start=0, end=None):
-    def partion(nums, start, end):
-        l, r = 0, end - 1
-        while r > l:
-            if nums[l] < nums[end]:
-                l += 1
-            elif nums[r] > nums[end]:
-                r -= 1
-            else:
-                nums[l], nums[r] = nums[r], nums[l]
-        assert l == r
-        if nums[r] > nums[end]:
-            nums[l], nums[end] = nums[end], nums[l]
-            return r
-        return end
+    def quicksort(self, start=0, end=None):
+        def partion(start, end):
+            l, r = start, end - 1
+            while r > l:
+                if self.list[l] < self.list[end]:
+                    l += 1
+                elif self.list[r] > self.list[end]:
+                    r -= 1
+                else:
+                    self.list[l], self.list[r] = self.list[r], self.list[l]
+            assert l == r
+            if self.list[r] > self.list[end]:
+                self.list[l], self.list[end] = self.list[end], self.list[l]
+                return r
+            return end
 
-    if len(nums) in [0, 1]:
-        return nums
-    if end == None:
-        end = len(nums) - 1
-    pivot = partion(nums, start, end)
-    left = quicksort(nums, start, pivot - 1)
-    right = quicksort(nums, pivot + 1, end)
-    return left + nums[pivot] * right
+        if len(self.list) in [0, 1]:
+            return self.list
+
+        if end == None:
+            end = len(self.list) - 1
+
+        pivot = partion(start, end)
+        print(self.list, self.list[pivot])
 
 
 if __name__ == "__main__":
@@ -68,7 +65,7 @@ if __name__ == "__main__":
     # pass
     for test in tests:
         start_time = time.time()
-        output = quicksort(test["input"]["nums"])
+        x = liste(test["input"]["nums"]).quicksort()
         # print(output == test["output"], end="")
         # print(f" output: {output}", end="")
         # print(f" dauer: {time.time()-start_time}")
