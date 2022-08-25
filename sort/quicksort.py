@@ -9,9 +9,8 @@ so lange nach rechts gehn bis es links kleiner/gleich und rechts größer ist
 """
 
 
-def quicksort(nums: list):
-    def partion(nums):
-        end = len(nums) - 1
+def quicksort(nums: list, start=0, end=None):
+    def partion(nums, start, end):
         l, r = 0, end - 1
         while r > l:
             if nums[l] < nums[end]:
@@ -28,9 +27,12 @@ def quicksort(nums: list):
 
     if len(nums) in [0, 1]:
         return nums
-
-    pivot = partion(nums)
-    print(nums, nums[pivot])
+    if end == None:
+        end = len(nums) - 1
+    pivot = partion(nums, start, end)
+    left = quicksort(nums, start, pivot - 1)
+    right = quicksort(nums, pivot + 1, end)
+    return left + nums[pivot] * right
 
 
 if __name__ == "__main__":
